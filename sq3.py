@@ -110,7 +110,10 @@ class Search_Protocol:
     def structure_data(self, sample_size, dimensions, landmarks):
         apriori_dimensions = len(self.reference_sequences)
         f_i = 0
-        self.primary_sample = []
+        self.primary_sample = [SeqRecord(seq=Seq('AAAAAAAAAAAAAAAAAAAA'),
+                                        id='artificial ctrl sequence - not data',
+                                        name='artificial ctrl sequence - not data',
+                                        description="included as a control for the analysis")]
         while len(self.primary_sample) < sample_size:
             file = self.file_list[f_i]
             self.primary_sample = self.primary_sample + [i for i in SeqIO.parse(file, "fastq")][:sample_size-len(self.primary_sample)]
